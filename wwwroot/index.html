@@ -1,0 +1,531 @@
+﻿<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lezzet Atlası | Giriş</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #ff4757;
+            --secondary: #2f3542;
+            --bg: #f1f2f6;
+            --white: #ffffff;
+            --success: #2ed573;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: var(--bg);
+            margin: 0;
+            padding: 0;
+            color: var(--secondary);
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        /* GİRİŞ VE KAYIT EKRANI TASARIMI */
+        #auth-view {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background: linear-gradient(135deg, rgba(255,71,87,0.1) 0%, rgba(47,53,66,0.1) 100%);
+        }
+
+        .auth-card {
+            background: white;
+            padding: 40px;
+            border-radius: 25px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+            width: 100%;
+            max-width: 400px;
+            text-align: center;
+        }
+
+            .auth-card h1 {
+                color: var(--primary);
+                margin-bottom: 5px;
+                font-size: 2.2em;
+                font-weight: 800;
+            }
+
+            .auth-card p {
+                color: #747d8c;
+                margin-bottom: 25px;
+            }
+
+        .auth-input {
+            width: 100%;
+            padding: 15px;
+            margin-bottom: 15px;
+            border: 1px solid #dfe4ea;
+            border-radius: 12px;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+            outline: none;
+            transition: 0.3s;
+        }
+
+            .auth-input:focus {
+                border-color: var(--primary);
+            }
+
+        .toggle-text {
+            margin-top: 15px;
+            font-size: 0.9em;
+            color: #747d8c;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+            .toggle-text:hover {
+                color: var(--primary);
+                text-decoration: underline;
+            }
+
+        /* ANA UYGULAMA TASARIMI (Öncekiyle aynı) */
+        #app-view {
+            display: none;
+            padding: 20px;
+            flex: 1;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: auto;
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 40px;
+            background: white;
+            padding: 20px 30px;
+            border-radius: 20px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+        }
+
+            .header h1 {
+                color: var(--primary);
+                margin: 0;
+                font-size: 2em;
+                font-weight: 800;
+                letter-spacing: -1px;
+            }
+
+        .header-right {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        h2 {
+            border-left: 6px solid var(--primary);
+            padding-left: 15px;
+            margin-top: 30px;
+            font-size: 1.6em;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        #restoranlar {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+            margin-top: 20px;
+        }
+
+        .card {
+            background: var(--white);
+            border-radius: 25px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+            transition: all 0.4s ease;
+            display: flex;
+            flex-direction: column;
+        }
+
+            .card:hover {
+                transform: translateY(-10px);
+                box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+            }
+
+        .card-img {
+            width: 100%;
+            height: 210px;
+            object-fit: cover;
+        }
+
+        .card-body {
+            padding: 20px;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+            .card-body h3 {
+                margin: 0 0 10px 0;
+                font-size: 1.4em;
+            }
+
+        .btn {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 14px;
+            border-radius: 15px;
+            cursor: pointer;
+            font-weight: 600;
+            width: 100%;
+            transition: 0.3s;
+            font-family: 'Poppins', sans-serif;
+        }
+
+            .btn:hover {
+                background: #ff6b81;
+            }
+
+        .btn-outline {
+            background: transparent;
+            border: 2px solid var(--primary);
+            color: var(--primary);
+            width: auto;
+            padding: 8px 20px;
+        }
+
+            .btn-outline:hover {
+                background: var(--primary);
+                color: white;
+            }
+
+        .table-container {
+            background: white;
+            border-radius: 25px;
+            overflow: hidden;
+            margin-top: 20px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th {
+            background: var(--secondary);
+            color: white;
+            padding: 18px;
+            text-align: left;
+        }
+
+        td {
+            padding: 18px;
+            border-bottom: 1px solid #f1f2f6;
+        }
+
+        .badge {
+            padding: 7px 14px;
+            border-radius: 25px;
+            font-size: 0.85em;
+            font-weight: 600;
+        }
+
+        .bg-hazir {
+            background: #fff3cd;
+            color: #856404;
+        }
+
+        .bg-yolda {
+            background: #d1ecf1;
+            color: #0c5460;
+        }
+
+        .bg-teslim {
+            background: #d4edda;
+            color: #155724;
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.6);
+            backdrop-filter: blur(8px);
+        }
+
+        .modal-content {
+            background: white;
+            margin: 5% auto;
+            padding: 35px;
+            border-radius: 30px;
+            width: 90%;
+            max-width: 480px;
+        }
+
+        .product-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px;
+            background: #f9fafb;
+            border-radius: 18px;
+            margin-bottom: 10px;
+            border: 1px solid #eee;
+        }
+    </style>
+</head>
+<body>
+
+    <div id="auth-view">
+        <div class="auth-card">
+            <h1>🍴 Lezzet Atlası</h1>
+            <p id="auth-subtitle">Sipariş vermek için giriş yapın</p>
+
+            <form id="login-form" onsubmit="handleLogin(event)">
+                <input type="text" id="login-user" class="auth-input" placeholder="Kullanıcı Adı" required>
+                <input type="password" id="login-pass" class="auth-input" placeholder="Şifre" required>
+                <button type="submit" class="btn">Giriş Yap</button>
+                <div class="toggle-text" onclick="toggleAuthMode()">Hesabın yok mu? Kayıt Ol</div>
+            </form>
+
+            <form id="register-form" onsubmit="handleRegister(event)" style="display:none;">
+                <input type="text" id="reg-user" class="auth-input" placeholder="Kullanıcı Adı" required>
+                <input type="email" id="reg-email" class="auth-input" placeholder="E-Posta" required>
+                <input type="password" id="reg-pass" class="auth-input" placeholder="Şifre" required>
+                <button type="submit" class="btn" style="background:var(--secondary)">Kayıt Ol</button>
+                <div class="toggle-text" onclick="toggleAuthMode()">Zaten üye misin? Giriş Yap</div>
+            </form>
+        </div>
+    </div>
+
+    <div id="app-view">
+        <div class="container">
+            <div class="header">
+                <h1>🍴 Lezzet Atlası</h1>
+                <div class="header-right">
+                    <span id="user-welcome" style="font-weight:600;"></span>
+                    <button class="btn btn-outline" onclick="logout()"><i class="fas fa-sign-out-alt"></i> Çıkış</button>
+                </div>
+            </div>
+
+            <h2><i class="fas fa-store-alt" style="color:var(--primary);"></i> Restoranlar</h2>
+            <div id="restoranlar">Yükleniyor...</div>
+
+            <h2><i class="fas fa-truck-loading" style="color:var(--primary);"></i> Canlı Sipariş Takibi</h2>
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr><th>ID</th><th>Restoran</th><th>Durum</th><th>Tutar</th><th>Yönet</th></tr>
+                    </thead>
+                    <tbody id="siparis-listesi"></tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <div id="menuModal" class="modal">
+        <div class="modal-content">
+            <h2 id="modalTitle" style="text-align:center; margin-top:0; color:var(--primary);">Menü</h2>
+            <div id="urun-listesi"></div>
+            <button class="btn" style="background:#747d8c; margin-top:20px;" onclick="closeModal()">Kapat</button>
+        </div>
+    </div>
+
+    <script>
+        const API_BASE = "https://localhost:7239/api";
+        let isLoginMode = true;
+
+        // --- AUTH (KİMLİK DOĞRULAMA) İŞLEMLERİ ---
+
+        // Ekranı Giriş veya Kayıt olarak değiştirir
+        function toggleAuthMode() {
+            isLoginMode = !isLoginMode;
+            document.getElementById("login-form").style.display = isLoginMode ? "block" : "none";
+            document.getElementById("register-form").style.display = isLoginMode ? "none" : "block";
+            document.getElementById("auth-subtitle").innerText = isLoginMode ? "Sipariş vermek için giriş yapın" : "Aramıza katılmak için kayıt olun";
+        }
+
+        // Uygulama ilk açıldığında Token var mı kontrol et
+        function checkAuth() {
+            const token = localStorage.getItem("token");
+            if (token) {
+                document.getElementById("auth-view").style.display = "none";
+                document.getElementById("app-view").style.display = "block";
+                document.getElementById("user-welcome").innerText = "Hoş Geldin!"; // İleride token içinden ismi de okuyabiliriz
+                initApp(); // Restoranları yükle
+            } else {
+                document.getElementById("auth-view").style.display = "flex";
+                document.getElementById("app-view").style.display = "none";
+            }
+        }
+
+        // Giriş Yapma Fonksiyonu
+        async function handleLogin(e) {
+            e.preventDefault();
+            const u = document.getElementById("login-user").value;
+            const p = document.getElementById("login-pass").value;
+
+            try {
+                const res = await fetch(`${API_BASE}/Auth/login`, {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({ username: u, password: p, email: "" })
+                });
+
+                if (res.ok) {
+                    const data = await res.json();
+                    localStorage.setItem("token", data.token); // Token'ı tarayıcıya kaydet
+                    checkAuth(); // Ekranı değiştir
+                } else {
+                    const error = await res.text();
+                    alert("Hata: " + error);
+                }
+            } catch (err) { alert("Sunucu bağlantı hatası!"); }
+        }
+
+        // Kayıt Olma Fonksiyonu
+        async function handleRegister(e) {
+            e.preventDefault();
+            const u = document.getElementById("reg-user").value;
+            const em = document.getElementById("reg-email").value;
+            const p = document.getElementById("reg-pass").value;
+
+            try {
+                const res = await fetch(`${API_BASE}/Auth/register`, {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({ username: u, email: em, password: p })
+                });
+
+                if (res.ok) {
+                    alert("Kayıt başarılı! Şimdi giriş yapabilirsiniz.");
+                    toggleAuthMode(); // Kayıt olunca login ekranına at
+                } else {
+                    const error = await res.text();
+                    alert("Kayıt Hatası: " + error);
+                }
+            } catch (err) { alert("Sunucu bağlantı hatası!"); }
+        }
+
+        // Çıkış Yapma Fonksiyonu
+        function logout() {
+            localStorage.removeItem("token"); // Token'ı sil
+            checkAuth(); // Ekranı giriş sayfasına döndür
+        }
+
+        // --- UYGULAMA İŞLEMLERİ (Öncekilerle aynı, sadece initApp içine alındı) ---
+
+        function getRestoranGorseli(ad) {
+            const isim = ad.toLowerCase();
+            if (isim.includes("pizza")) return "https://images.unsplash.com/photo-1513104890138-7c749659a591?w=600&q=80";
+            if (isim.includes("burger") || isim.includes("hamburger")) return "https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=600&q=80";
+            if (isim.includes("döner") || isim.includes("kebap")) return "https://images.unsplash.com/photo-1633321702518-7feccafb94d5?w=600&q=80";
+            if (isim.includes("sosisli")) return "https://images.unsplash.com/photo-1541214113241-21578d2d9b62?w=600&q=80";
+            return "https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=600&q=80";
+        }
+
+        async function initApp() {
+            await loadRestoranlar();
+            await loadSiparisler();
+        }
+
+        async function loadRestoranlar() {
+            try {
+                const res = await fetch(`${API_BASE}/Restaurants`);
+                const data = await res.json();
+                let html = "";
+                data.forEach(r => {
+                    const rAd = r.name || r.ad || r.Name || r.Ad;
+                    html += `
+                        <div class="card">
+                            <img src="${getRestoranGorseli(rAd)}" class="card-img">
+                            <div class="card-body">
+                                <h3>${rAd}</h3>
+                                <button class="btn" onclick="openMenu(${r.id || r.Id}, '${rAd}')"><i class="fas fa-utensils"></i> Menüyü Gör</button>
+                            </div>
+                        </div>`;
+                });
+                document.getElementById("restoranlar").innerHTML = html;
+            } catch (e) { }
+        }
+
+        async function openMenu(id, name) {
+            document.getElementById("modalTitle").innerText = name;
+            document.getElementById("menuModal").style.display = "block";
+            document.getElementById("urun-listesi").innerHTML = "Yükleniyor...";
+
+            try {
+                const res = await fetch(`${API_BASE}/Products`);
+                const data = await res.json();
+                const filtrelenmis = data.filter(p => (p.restaurantId || p.RestaurantId) == id);
+
+                let html = "";
+                filtrelenmis.forEach(p => {
+                    html += `
+                        <div class="product-item">
+                            <span><b>${p.name || p.Name}</b><br><small style="color:var(--primary); font-weight:600;">${p.price || p.Price} ₺</small></span>
+                            <button class="btn" style="width:auto; padding:8px 18px; background:var(--success);" onclick="siparisVer(${id}, ${p.price || p.Price})">Ekle</button>
+                        </div>`;
+                });
+                document.getElementById("urun-listesi").innerHTML = html || "Menü boş.";
+            } catch (e) { }
+        }
+
+        async function siparisVer(rId, fiyat) {
+            const payload = { RestaurantId: parseInt(rId), CustomerId: 1, TotalPrice: parseFloat(fiyat), Status: "Hazırlanıyor", OrderDate: new Date().toISOString() };
+            await fetch(`${API_BASE}/Orders`, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(payload) });
+            alert("Sipariş başarıyla gönderildi!");
+            closeModal(); loadSiparisler();
+        }
+
+        async function loadSiparisler() {
+            try {
+                const restRes = await fetch(`${API_BASE}/Restaurants`);
+                const restoranlar = await restRes.json();
+                const res = await fetch(`${API_BASE}/Orders`);
+                const data = await res.json();
+                let html = "";
+                data.reverse().forEach(s => {
+                    const rId = s.restaurantId || s.RestaurantId;
+                    const rest = restoranlar.find(r => (r.id || r.Id) == rId);
+                    const durum = s.status || s.Status || "Hazırlanıyor";
+                    let sClass = durum === "Hazırlanıyor" ? "bg-hazir" : (durum === "Yolda" ? "bg-yolda" : "bg-teslim");
+
+                    html += `<tr>
+                        <td>#${s.id || s.Id}</td>
+                        <td><b>${rest ? (rest.name || rest.Name) : "Restoran"}</b></td>
+                        <td><span class="badge ${sClass}">${durum}</span></td>
+                        <td style="font-weight:600; color:var(--primary);">${s.totalPrice || s.TotalPrice} ₺</td>
+                        <td>${durum !== "Teslim Edildi" ? `<button class="btn" style="width:auto; padding:6px 12px; font-size:0.75em;" onclick="durumGuncelle(${s.id || s.Id}, '${durum}')">İlerlet</button>` : `<i class="fas fa-check-circle" style="color:var(--success)"></i>`}</td>
+                    </tr>`;
+                });
+                document.getElementById("siparis-listesi").innerHTML = html;
+            } catch (e) { }
+        }
+
+        async function durumGuncelle(id, currentStatus) {
+            let nextStatus = currentStatus === "Hazırlanıyor" ? "Yolda" : "Teslim Edildi";
+            const getRes = await fetch(`${API_BASE}/Orders/${id}`);
+            const siparis = await getRes.json();
+            siparis.status = nextStatus; siparis.Status = nextStatus;
+            await fetch(`${API_BASE}/Orders/${id}`, { method: "PUT", headers: { "Content-Type": "application/json" }, body: JSON.stringify(siparis) });
+            loadSiparisler();
+        }
+
+        function closeModal() { document.getElementById("menuModal").style.display = "none"; }
+
+        // Sayfa yüklendiğinde Auth kontrolü yap
+        checkAuth();
+    </script>
+</body>
+</html>

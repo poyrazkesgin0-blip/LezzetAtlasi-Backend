@@ -1,0 +1,6 @@
+@sipariş_uygulaması_HostAddress = http://localhost:5126
+
+GET {{sipariş_uygulaması_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
