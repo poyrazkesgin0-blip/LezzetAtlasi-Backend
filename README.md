@@ -52,5 +52,5 @@ Platformun güvenli oturum yönetimi, dinamik fiyatlandırma algoritmaları, ça
 
 ### 1. Projeyi Klonlama
 ```bash
-git clone [https://github.com/poyrazkesgin0-blip/LezzetAtlasi-Backend.git](https://github.com/poyrazkesgin0-blip/LezzetAtlasi-Backend.git)
+git clone https://github.com/poyrazkesgin0-blip/LezzetAtlasi-Backend.git
 cd LezzetAtlasi-Backend
