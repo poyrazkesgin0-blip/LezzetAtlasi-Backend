@@ -1,56 +1,55 @@
-# ⚙️ Lezzet Atlası  | Backend (ASP.NET Core Web API)
+# ⚙️ Lezzet Atlası | Backend (ASP.NET Core Web API)
 
-Bu depo, **Lezzet Atlası** online sipariş ve restoran yönetim platformunun sunucu tarafını (Backend) barındırmaktadır. Modern RESTful mimari standartlarına uygun olarak **C#** ve **ASP.NET Core Web API** kullanılarak geliştirilmiştir.
-
-Platformun güvenli oturum yönetimi, dinamik fiyatlandırma algoritmaları, çapraz satış rotaları ve veritabanı işlemleri tamamen bu servis üzerinden yönetilmektedir.
+Bu depo, **Lezzet Atlası** online sipariş ve restoran yönetim platformunun sunucu tarafını barındırmaktadır. Modern RESTful mimari standartlarına uygun olarak **C#** ve **ASP.NET Core Web API** kullanılarak geliştirilmiştir.
 
 ---
 
 ## 🏗️ Mimari & Temel Özellikler
 
 ### 🔒 Güvenlik & Kimlik Doğrulama (JWT Auth)
-- **JSON Web Tokens (JWT):** İstemci tarafında durumsuz (stateless) ve güvenli oturum yönetimi.
-- **Rol Bazlı Yetkilendirme (Role-Based Auth):** Müşteri ve Restoran Yöneticisi (`admin`) ayrımı.
-  - `[AllowAnonymous]` ile herkese açık dükkan/menü listeleme uç noktaları.
-  - `[Authorize]` ile korunan sipariş tamamlama ve profil yönetimi rotaları.
+- **JSON Web Tokens (JWT):** Güvenli ve durumsuz oturum yönetimi.
+- **Yetkilendirme:** Role-Based Auth ile Müşteri ve Admin ayrımı.
 
-### 🗄️ Veritabanı & ORM (Entity Framework Core)
-- **Code-First Yaklaşımı:** C# model sınıfları üzerinden otomatik veritabanı şeması ve tablo oluşturma.
-- **İlişkisel Veri Tasarımı:** Restoranlar, Ürünler ve Siparişler arası veri bütünlüğü.
-- **Veritabanı Esnekliği:** Geliştirme ortamında **SQLite** veya **SQL Server** ile tam uyumluluk.
-
-### 🚀 API Uç Noktaları (Endpoints) & CORS Mimarisi
-- **CORS Politikaları:** Vanilla JS Frontend uygulamasının API'yi sorunsuz tüketebilmesi için yapılandırılmış erişim izinleri.
-- **Model Binding Esnekliği:** İstemciden gelen hem `camelCase` hem de `PascalCase` verileri çözümleyen esnek yapı.
+### 🗄️ Veritabanı & ORM (EF Core)
+- **Code-First:** C# modelleri üzerinden otomatik tablo yönetimi.
+- **İlişkisel Tasarım:** Restoran, Ürün ve Sipariş arası veri bütünlüğü.
 
 ---
 
-## 📡 Temel API Rotaları (Endpoints)
+## 🧪 API Operasyonel Doğrulama Raporu (Full CRUD)
 
-| HTTP Metodu | Uç Nokta (Endpoint) | Açıklama | Yetki |
-| :--- | :--- | :--- | :--- |
-| **POST** | `/api/Auth/register` | Yeni kullanıcı kaydı açar. | Herkese Açık |
-| **POST** | `/api/Auth/login` | Giriş yapar ve JWT Token döner. | Herkese Açık |
-| **GET** | `/api/Restaurants` | Tüm restoranları listeler. | Herkese Açık |
-| **GET** | `/api/Products` | Menüleri ve ürünleri getirir. | Herkese Açık |
-| **POST** | `/api/Orders` | Yeni sipariş oluşturur. | Token Gerekli |
-| **PUT** | `/api/Orders/{id}` | Sipariş durumunu günceller. | Sadece Admin |
+Sistemin tüm ana modülleri **Swagger UI** üzerinden test edilmiş ve operasyonel başarısı aşağıdaki görsellerle kayıt altına alınmıştır:
+
+### 🔑 1. Kimlik Doğrulama (Auth)
+- **Kullanıcı Kayıt:** ![Kayıt](auth_register.png)
+- **Giriş & Token Üretimi:** ![Giriş](auth_login.png)
+
+### 🏪 2. Restoran Yönetimi
+- **Ekleme:** ![Ekle](restoran_ekleme.png.png) 
+- **Listeleme:** ![Liste](restoran_listeleme.png.png)
+- **Güncelleme:** ![Güncelle](restoran_guncelleme.png.png) 
+- **Silme:** ![Sil](restoran_silme.png)
+
+### 🌭 3. Ürün ve Menü Mimarisi
+- **Ekleme:** ![Ürün Ekle](urun_ekleme_detay.png.png) 
+- **Sorgulama:** ![Ürün Liste](urun_listeleme.png.png)
+- **Güncelleme:** ![Ürün Güncelle](urun_guncelleme.png.png) 
+- **Silme:** ![Ürün Sil](urun_silme.png.png)
+
+### 📦 4. Sipariş İşlem Motoru
+- **Sipariş Oluşturma:** ![Sipariş Ekle](siparis_ekleme.png)
+- **Sipariş Detayı (ID):** ![Sipariş Detay](siparis_detay.png)
+- **Sipariş Takibi:** ![Sipariş Liste](siparis_listeleme.png)
 
 ---
 
-## 🛠️ Kullanılan Teknolojiler & Paketler
-
-- **Çekirdek:** .NET 6.0 / 8.0, C# 10+
-- **Web API:** ASP.NET Core REST API
-- **Veri Erişim (ORM):** Microsoft.EntityFrameworkCore, SQLite/SQL Server
-- **Kimlik Doğrulama:** Microsoft.AspNetCore.Authentication.JwtBearer
-- **Dökümantasyon:** Swashbuckle.AspNetCore (Swagger UI)
+## 🛠️ Kullanılan Teknolojiler
+- **Core:** .NET 8.0, C# 12
+- **Data:** Entity Framework Core, SQLite
+- **Security:** JWT Bearer
+- **Docs:** Swagger (OpenAPI)
 
 ---
 
-## 🚀 Kurulum & Yerel Ortamda Çalıştırma
-
-### 1. Projeyi Klonlama
-```bash
-git clone https://github.com/poyrazkesgin0-blip/LezzetAtlasi-Backend.git
-cd LezzetAtlasi-Backend
+> **Geliştirici:** Poyraz Kesgin  
+> **Durum:** API uçları başarıyla test edildi ve dökümante edildi.
